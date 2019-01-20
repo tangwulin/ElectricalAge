@@ -176,7 +176,7 @@ public class SubSystem {
 
                 default:
                         //FieldLUDecomposition QRDecomposition  LUDecomposition RRQRDecomposition
-                        RealMatrix Ainv = new LUDecomposition(A).getSolver().getInverse();
+                        RealMatrix Ainv = new QRDecomposition(A).getSolver().getInverse();
                         AInvdata = Ainv.getData();
                         singularMatrix = false;
                     break;
