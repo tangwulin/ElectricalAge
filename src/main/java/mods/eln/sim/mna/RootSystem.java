@@ -254,11 +254,11 @@ public class RootSystem {
 
         profiler.add("stepCalc");
         for (SubSystem s : systems) {
-            s.stepCalc();
+            if(s.getStateCount() > 2) s.stepCalc();
         }
         profiler.add("stepFlush");
         for (SubSystem s : systems) {
-            s.stepFlush();
+            if(s.getStateCount() > 2) s.stepFlush();
         }
         profiler.add("simProcessFlush");
         for (ISubSystemProcessFlush p : processF) {

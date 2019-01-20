@@ -32,6 +32,7 @@ public class SubSystem {
 
     double dt;
     boolean matrixValid = false;
+    boolean dirty = true;
 
     int stateCount;
     RealMatrix A;
@@ -58,6 +59,7 @@ public class SubSystem {
 
     public void invalidate() {
         matrixValid = false;
+        dirty = true;
     }
 
     public void addComponent(Component c) {
@@ -117,18 +119,28 @@ public class SubSystem {
 
     //double[][] getDataRef()
 
+    public int getStateCount() {
+        //if(dirty) {
+            stateCount = states.size();
+            dirty = false;
+        //}
+        return stateCount;
+    }
+
     public void generateMatrix() {
-        stateCount = states.size();
+        getStateCount();
 
         Profiler p = new Profiler();
         p.add("Inversse with " + stateCount + " state : ");
 
+        /*
         if(stateCount == 0) {
             // Don't even bother
             AInvdata = new double[][]{};
             singularMatrix = false;
             return;
         }
+        */
 
         A = MatrixUtils.createRealMatrix(stateCount, stateCount);
         //Adata = ((Array2DRowRealMatrix) A).getDataRef();
@@ -152,6 +164,7 @@ public class SubSystem {
         //	org.apache.commons.math3.linear.
 
         try {
+            /*
             switch(stateCount) {
                 case 1:
                     // Trivial.
@@ -175,17 +188,18 @@ public class SubSystem {
                     break;
 
                 default:
-                        //FieldLUDecomposition QRDecomposition  LUDecomposition RRQRDecomposition
-                        RealMatrix Ainv = new QRDecomposition(A).getSolver().getInverse();
-                        AInvdata = Ainv.getData();
-                        singularMatrix = false;
+                */
+                    //FieldLUDecomposition QRDecomposition  LUDecomposition RRQRDecomposition
+                    RealMatrix Ainv = new QRDecomposition(A).getSolver().getInverse();
+                    AInvdata = Ainv.getData();
+                    singularMatrix = false;
+                    /*
                     break;
             }
+            */
         } catch (Exception e) {
             singularMatrix = true;
             if (stateCount > 1) {
-                int idx = 0;
-                idx++;
                 Utils.println("//////////SingularMatrix////////////");
             }
         }
