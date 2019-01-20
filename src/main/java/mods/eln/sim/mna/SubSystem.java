@@ -11,6 +11,7 @@ import mods.eln.sim.mna.misc.ISubSystemProcessFlush;
 import mods.eln.sim.mna.misc.ISubSystemProcessI;
 import mods.eln.sim.mna.state.State;
 import mods.eln.sim.mna.state.VoltageState;
+import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.QRDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -122,6 +123,13 @@ public class SubSystem {
         Profiler p = new Profiler();
         p.add("Inversse with " + stateCount + " state : ");
 
+        if(stateCount == 0) {
+            // Don't even bother
+            AInvdata = new double[][]{};
+            singularMatrix = false;
+            return;
+        }
+
         A = MatrixUtils.createRealMatrix(stateCount, stateCount);
         //Adata = ((Array2DRowRealMatrix) A).getDataRef();
         // X = MatrixUtils.createRealMatrix(stateCount, 1); Xdata =
@@ -144,10 +152,35 @@ public class SubSystem {
         //	org.apache.commons.math3.linear.
 
         try {
-            //FieldLUDecomposition QRDecomposition  LUDecomposition RRQRDecomposition
-            RealMatrix Ainv = new QRDecomposition(A).getSolver().getInverse();
-            AInvdata = Ainv.getData();
-            singularMatrix = false;
+            switch(stateCount) {
+                case 1:
+                    // Trivial.
+                    AInvdata = new double[][]{{
+                        1.0 / A.getEntry(0, 0)
+                    }};
+                    singularMatrix = false;
+                    break;
+
+                case 2:
+                    // Less trivial
+                    double[][] data = A.getData();
+                    double recDet = 1.0 / (
+                        data[0][0] * data[1][1] - data[1][0] * data[0][1]
+                    );
+                    AInvdata = new double[][] {
+                        {recDet * data[1][1], -recDet * data[0][1]},
+                        {-recDet * data[1][0], recDet * data[0][0]}
+                    };
+                    singularMatrix = false;
+                    break;
+
+                default:
+                        //FieldLUDecomposition QRDecomposition  LUDecomposition RRQRDecomposition
+                        RealMatrix Ainv = new LUDecomposition(A).getSolver().getInverse();
+                        AInvdata = Ainv.getData();
+                        singularMatrix = false;
+                    break;
+            }
         } catch (Exception e) {
             singularMatrix = true;
             if (stateCount > 1) {
