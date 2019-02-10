@@ -1752,7 +1752,7 @@ public class Eln {
 
         Utils.printFunction(voltageFunction, -0.2, 1.2, 0.1);
 
-        double stdDischargeTime = 60 * 16;
+        double stdDischargeTime = 60 * 4 * 2;
         double stdU = LVU;
         double stdP = LVP / 4 / cablePace; //you need 4 to support a full cable
         double stdEfficiency = 1.0 - 2.0 / 50.0; //96%
@@ -7778,15 +7778,15 @@ public class Eln {
         maceratorRecipes.addRecipe(new Recipe(findItemStack("E-Coal Leggings"),
             new ItemStack[]{findItemStack("Coal Dust", 24)}, 10.0 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Cost Oriented Battery"),
-            new ItemStack[]{findItemStack("Lead Dust", 6)}, 50.0 * f));
+            new ItemStack[]{findItemStack("Lead Dust", 6)}, 12.5 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Life Oriented Battery"),
-            new ItemStack[]{findItemStack("Lead Dust", 6)}, 50.0 * f));
+            new ItemStack[]{findItemStack("Lead Dust", 6)}, 12.5 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Current Oriented Battery"),
-            new ItemStack[]{findItemStack("Lead Dust", 6)}, 50.0 * f));
+            new ItemStack[]{findItemStack("Lead Dust", 6)}, 12.5 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Voltage Oriented Battery"),
-            new ItemStack[]{findItemStack("Lead Dust", 6)}, 50.0 * f));
+            new ItemStack[]{findItemStack("Lead Dust", 6)}, 12.5 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Capacity Oriented Battery"),
-            new ItemStack[]{findItemStack("Lead Dust", 6)}, 50.0 * f));
+            new ItemStack[]{findItemStack("Lead Dust", 6)}, 12.5 * f));
         maceratorRecipes.addRecipe(new Recipe(findItemStack("Single-use Battery"),
             new ItemStack[]{findItemStack("Copper Dust", 3)}, 10.0 * f));
 
