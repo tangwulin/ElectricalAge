@@ -1770,7 +1770,7 @@ public class Eln {
                 stdU, //battery nominal voltage
                 stdP * 1.2, //how much power it can handle at max,
                 0.00,  //precentage of its total output to self-discharge. Should probably be 0
-                stdP, //no idea
+                stdP, //likely nominal power
                 stdDischargeTime * batteryCapacityFactor, stdEfficiency, stdBatteryHalfLife,
 
                 heatTIme, 60, -100, // thermalHeatTime, thermalWarmLimit, // thermalCoolLimit,
@@ -7936,6 +7936,8 @@ public class Eln {
 
         magnetiserRecipes.addRecipe(new Recipe(findItemStack("Inert Canister", 1),
             new ItemStack[]{new ItemStack(Items.ender_pearl)}, 150000.0));
+        magnetiserRecipes.addRecipe(new Recipe(new ItemStack(Items.ender_pearl),
+            new ItemStack[]{new ItemStack(Items.experience_bottle,20)}, 100000.0));
     }
 
     private void recipeFuelBurnerItem() {
