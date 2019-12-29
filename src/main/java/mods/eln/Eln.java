@@ -3140,7 +3140,6 @@ public class Eln {
             );
             transparentNodeItem.addDescriptor(subId + (id << 6), desc);
         }
-        /*
         // Soon, you may have it. But not yet...
         // TODO: Particles flying out the back, hitbox, efficiency curves, more testing...
         {
@@ -3151,7 +3150,6 @@ public class Eln {
             );
             transparentNodeItem.addDescriptor(subId + (id << 6), desc);
         }
-        */
     }
 
     public ArrayList<ItemStack> furnaceList = new ArrayList<ItemStack>();

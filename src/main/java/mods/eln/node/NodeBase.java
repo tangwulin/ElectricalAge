@@ -213,21 +213,23 @@ public abstract class NodeBase {
     public boolean onBlockActivated(EntityPlayer entityPlayer, Direction side, float vx, float vy, float vz) {
         if (!entityPlayer.worldObj.isRemote && entityPlayer.getCurrentEquippedItem() != null) {
             ItemStack equipped = entityPlayer.getCurrentEquippedItem();
+            NodeBase core = Eln.ghostManager.getCoreNode(coordonate);
+            if(core == null) core = this;
             if (Eln.multiMeterElement.checkSameItemStack(equipped)) {
-                String str = multiMeterString(side);
+                String str = core.multiMeterString(side);
                 if (str != null)
                     Utils.addChatMessage(entityPlayer, str);
                 return true;
             }
             if (Eln.thermometerElement.checkSameItemStack(equipped)) {
-                String str = thermoMeterString(side);
+                String str = core.thermoMeterString(side);
                 if (str != null)
                     Utils.addChatMessage(entityPlayer, str);
                 return true;
             }
             if (Eln.allMeterElement.checkSameItemStack(equipped)) {
-                String str1 = multiMeterString(side);
-                String str2 = thermoMeterString(side);
+                String str1 = core.multiMeterString(side);
+                String str2 = core.thermoMeterString(side);
                 String str = "";
                 if (str1 != null)
                     str += str1;
@@ -244,11 +246,11 @@ public abstract class NodeBase {
                 String act;
                 SoundCommand snd = beepError;
                 if(entityPlayer.isSneaking() || Eln.playerManager.get(entityPlayer).getInteractEnable()) {
-                    if(writeConfigTool(side, equipped.getTagCompound(), entityPlayer))
+                    if(core.writeConfigTool(side, equipped.getTagCompound(), entityPlayer))
                         snd = beepDownloaded;
                     act = "write";
                 } else {
-                    if(readConfigTool(side, equipped.getTagCompound(), entityPlayer))
+                    if(core.readConfigTool(side, equipped.getTagCompound(), entityPlayer))
                         snd = beepUploaded;
                     act = "read";
                 }

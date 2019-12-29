@@ -113,6 +113,12 @@ public class GhostManager extends WorldSavedData {
         coordonate.world().setBlockToAir(coordonate.x, coordonate.y, coordonate.z); //caca1.5.1
     }
 
+    public NodeBase getCoreNode(Coordonate coord) {
+        GhostElement elem = ghostTable.get(coord);
+        if(elem == null) return NodeManager.instance.getNodeFromCoordonate(coord);
+        return NodeManager.instance.getNodeFromCoordonate(elem.observatorCoordonate);
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 		/*for(NBTTagCompound o : Utils.getTags(nbt)) {

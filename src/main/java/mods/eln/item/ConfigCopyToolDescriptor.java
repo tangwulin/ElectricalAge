@@ -30,7 +30,7 @@ public class ConfigCopyToolDescriptor extends GenericItemUsingDamageDescriptor {
         Block block = world.getBlock(x, y, z);
 
         if(block instanceof NodeBlock) {
-            NodeBase node = NodeManager.instance.getNodeFromCoordonate(new Coordonate(x, y, z, world));
+            NodeBase node = Eln.ghostManager.getCoreNode(new Coordonate(x, y, z, world));
             if(node != null) {
                 node.onBlockActivated(player, Direction.fromIntMinecraftSide(side), vx, vy, vz);
             }

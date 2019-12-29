@@ -4,7 +4,7 @@ import mods.eln.Eln;
 import mods.eln.i18n.I18N;
 import mods.eln.item.SolarTrackerDescriptor;
 import mods.eln.misc.Direction;
-import mods.eln.misc.GhostPowerNode;
+import mods.eln.node.GhostPowerNode;
 import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
 import mods.eln.node.AutoAcceptInventoryProxy;

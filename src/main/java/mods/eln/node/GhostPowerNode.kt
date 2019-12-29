@@ -1,7 +1,8 @@
-package mods.eln.misc
+package mods.eln.node
 
-import mods.eln.node.GhostNode
-import mods.eln.node.NodeBase
+import mods.eln.misc.Coordonate
+import mods.eln.misc.Direction
+import mods.eln.misc.LRDU
 import mods.eln.sim.ElectricalLoad
 import mods.eln.sim.ThermalLoad
 import net.minecraft.entity.EntityLivingBase
